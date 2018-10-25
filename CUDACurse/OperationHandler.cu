@@ -13,7 +13,7 @@ __global__ void matrixMult(const float *a, const float *b, int n, float *c) {
 	float sum = 0.0f;
 
 	int indexOfA = n * BLOCK_SIZE * bY + n * tY;
-	int indexOfB = n * BLOCK_SIZE * bX + n * tX;
+	int indexOfB = BLOCK_SIZE * bX + tX;
 
 	int indexOfC = n * BLOCK_SIZE * bY + BLOCK_SIZE * bX;
 
