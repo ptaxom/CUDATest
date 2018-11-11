@@ -10,7 +10,7 @@ void printMatrix(float *matrix, int size) {
 }
 
 int main() {
-	int N = 1024 * 4;
+	int N = 64;
 	float *A = new float[N*N];
 	float *B = new float[N*N];
 	float *C = new float[N*N];
@@ -25,11 +25,22 @@ int main() {
 		B[i*N + i] = 1;
 
 
-	multiplyerGPU(A, B, N, C);
+
+		printMatrix(A, N);
+
+		//multiplyerGPU(A, B, N, C, 0);
+
+
+		multiplyerGPU(A, B, N, C, 1);
+
+
+		printMatrix(C, N);
+
 
 	delete A;
 	delete B;
 	delete C;
+
 
 	return 0;
 }
