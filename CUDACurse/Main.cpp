@@ -1,46 +1,35 @@
+
+#include <conio.h>
+
+#include <opencv2/highgui.hpp>
 #include <iostream>
-#include "OperationHandler.cuh"
+#include <fstream>
 
-void printMatrix(float *matrix, int size) {
-	for (int i = 0; i < size; i++) {
-		for (int j = 0; j < size; j++)
-			printf("%.0f ", matrix[i*size + j]);
-		printf("\n");
-	}
-}
-
-int main() {
-	int N = 64;
-	float *A = new float[N*N];
-	float *B = new float[N*N];
-	float *C = new float[N*N];
-
-	for (int i = 0; i < N*N; i++) {
-		A[i] = (rand() % 1024) / 32;
-		B[i] = 0;
-		C[i] = 0;
-	}
-
-	for (int i = 0; i < N; i++)
-		B[i*N + i] = 1;
+using namespace std;
+using namespace cv;
 
 
+int main()
+{
+	
+	Mat frame;
 
-		printMatrix(A, N);
+	VideoCapture cap;
+	cap.open(0);
 
-		//multiplyerGPU(A, B, N, C, 0);
-
-
-		multiplyerGPU(A, B, N, C, 1);
+	cap.read(frame);
 
 
-		printMatrix(C, N);
+	imshow("test", frame);
+
+	
 
 
-	delete A;
-	delete B;
-	delete C;
-
+	frame.convertTo(frame, CV_32S);
+	cout << frame.at<int>(100, 100);
+	waitKey();
 
 	return 0;
+
+
 }
